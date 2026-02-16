@@ -158,8 +158,9 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
--- Match Neovim colors to terminal (Kitty) palette.
-vim.o.termguicolors = false
+-- Match Neovim using an explicit Dark Pastel palette.
+-- Previous terminal-palette mode used `termguicolors = false`.
+vim.o.termguicolors = true
 vim.o.background = 'dark'
 
 -- Minimal number of screen lines to keep above and below the cursor.
@@ -881,28 +882,25 @@ require('lazy').setup({
   },
 
   --[[
-  { -- Previous Neovim theme (kept commented for quick rollback).
+  { -- Dark pastel Neovim theme (kept commented for reference).
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
+      require('catppuccin').setup {
+        no_italic = true,
       }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
   --]]
+
+  -- Built-in colorscheme configured near the end of this file:
+  --   vim.cmd.colorscheme 'lunaperche'
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -1018,8 +1016,9 @@ require('lazy').setup({
   },
 })
 
--- Use terminal palette so Neovim follows Kitty theme.
-vim.cmd.colorscheme 'default'
+-- Previous terminal-palette mode and explicit palette override removed.
+-- Theme is now set with a built-in Neovim colorscheme.
+vim.cmd.colorscheme 'lunaperche'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
