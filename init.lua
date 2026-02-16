@@ -158,6 +158,10 @@ vim.o.inccommand = 'split'
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
+-- Match Neovim colors to terminal (Kitty) palette.
+vim.o.termguicolors = false
+vim.o.background = 'dark'
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
@@ -876,7 +880,8 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
+  --[[
+  { -- Previous Neovim theme (kept commented for quick rollback).
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
     --
@@ -897,6 +902,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+  --]]
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -1011,6 +1017,9 @@ require('lazy').setup({
     },
   },
 })
+
+-- Use terminal palette so Neovim follows Kitty theme.
+vim.cmd.colorscheme 'default'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
